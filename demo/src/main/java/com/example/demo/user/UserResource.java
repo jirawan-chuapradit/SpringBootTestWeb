@@ -3,6 +3,8 @@ package com.example.demo.user;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,6 +34,12 @@ public class UserResource {
 		
 		if(user == null) {
 			throw new UserNotFoundException("id-" + id);
+			
+			// "all-users", SERVER_PATH+ "/users"
+			// retrieveAllUsers
+			
+			
+			// HATEOAS
 		}
 		return user;
 	}
@@ -39,7 +47,7 @@ public class UserResource {
 	// input - details of user
 	// output - CREATED & Return the created URI
 	@PostMapping("/users")
-	public ResponseEntity<Object> createUser(@RequestBody User user) {
+	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 		User saveUser = service.save(user);
 		
 		//created
